@@ -4,7 +4,7 @@
       <div class="title-wrap">
         <h2>🛠️ 장비 예지보전 정밀 진단</h2>
         <div class="selector-group">
-          <label>분석 대상 교차로:</label>
+          <label>분석 대상 교차로:  </label>
           <select v-model="selectedId" @change="updateData" class="intersection-select">
             <option v-for="item in intersectionList" :key="item.id" :value="item.id">
               {{ item.name }} ({{ item.id }})
@@ -64,7 +64,7 @@
       <div class="chart-inner-bg">
         <div class="chart-container">
           <svg viewBox="0 0 1000 160" class="history-svg">
-            <line v-for="i in 3" :key="i" x1="0" :y1="i * 40 + 20" x2="1000" :y2="i * 40 + 20" stroke="#f0f0f0" stroke-width="1" />
+            <line v-for="i in 3" :key="i" x1="0" :y1="i * 40 + 20" x2="1000" :y2="i * 40 + 20" stroke="#bfbdbd" stroke-width="1" />
             <path :d="chartPath" fill="none" stroke="#3498db" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
             <g v-for="(p, i) in historyPoints" :key="i">
               <circle :cx="p.x" :cy="p.y" r="4" :fill="p.val > 60 ? '#e74c3c' : '#3498db'" />
@@ -291,7 +291,7 @@ onUnmounted(() => {
 .rul-fill { height: 100%; transition: width 0.8s ease; }
 .rul-labels { display: flex; justify-content: space-between; font-size: 11px; color: #999; margin-top: 5px; }
 
-/* ⭐ 카드 분리 설정: 각 카드가 독립적으로 존재하도록 간격 부여 */
+/* ⭐ 카드 분리 설정 */
 .breakdown-mini-column {
   display: flex;
   flex-direction: column;
@@ -303,7 +303,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: none; /* 포인트 테두리 제거 */
+  border-top: none;
 }
 .mini-sub-card span { font-size: 12px; color: #888; display: block; }
 .mini-sub-card strong { font-size: 20px; color: #333; }
@@ -312,11 +312,12 @@ onUnmounted(() => {
 .chart-inner-bg {
   background: #ffffff; border: 1px solid #eef1f5; border-radius: 10px;
   padding: 30px 10px 15px; margin-top: 15px;
+  
 }
 .history-svg { width: 100%; height: auto; display: block; overflow: visible; }
 .chart-labels {
   display: flex; justify-content: space-between; padding: 0 60px;
-  font-size: 12px; color: #a0a0a0; margin-top: 15px;
+  font-size: 12px; color: #383838; margin-top: 15px;
 }
 .chart-labels .today { color: #3498db; font-weight: bold; }
 
@@ -324,7 +325,7 @@ onUnmounted(() => {
 .detail-analysis-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
 }
-.detail-card { border-top: none; } /* 포인트 테두리 제거 */
+.detail-card { border-top: none; }
 .detail-card h3 {
   font-size: 16px; margin-bottom: 15px; color: #334155;
   border-left: 4px solid #3498db; padding-left: 10px;
@@ -336,16 +337,61 @@ onUnmounted(() => {
 .metric-item span { font-size: 12px; color: #64748b; display: block; }
 .metric-item strong { font-size: 18px; color: #1e293b; margin-top: 5px; display: block; }
 
-.analysis-report-box { border-top: none; } /* 포인트 테두리 제거 */
+.analysis-report-box { border-top: none; }
 .comment-content {
   display: flex; gap: 15px; align-items: center; background: #f0f7ff;
   padding: 15px; border-radius: 8px; font-size: 14px;
 }
 
-/* 다크모드 */
-.dark-theme .analysis-view { background: #0f172a; }
-.dark-theme .v2x-card { background: #1e293b; color: #f1f5f9; border: 1px solid #334155; }
-.dark-theme .chart-inner-bg { background: #0f172a; border-color: #334155; }
-.dark-theme .metric-item { background: #0f172a; }
-.dark-theme strong, .dark-theme h2, .dark-theme h3 { color: #fff !important; }
+/* ⭐ 다크모드 강화 (그림자 추가 및 대비 최적화) */
+.dark-theme .analysis-view { background: #4f5052; }
+
+.dark-theme .v2x-card { 
+  background: #1e1e1e; 
+  color: #f1f5f9; 
+  border: 1px solid #2a2a2a;
+  /* 쉐도우 추가: 배경보다 약간 더 어두운 색상으로 입체감 부여 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
+}
+
+.dark-theme .chart-inner-bg { 
+  background: #1e1e1e; 
+  border-color: #2a2a2a; 
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* 안쪽 그림자로 깊이감 */
+}
+
+.dark-theme .metric-item, 
+.dark-theme .icon { 
+  background: #333232; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.dark-theme .comment-content {
+  background: #2a2a2a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme strong, 
+.dark-theme h2, 
+.dark-theme h3 { 
+  color: #fff !important; 
+}
+
+.dark-theme .metric-item span { 
+  color: #bbb; /* 다크모드 폰트 컬러 조정 */
+}
+
+.dark-theme .metric-item strong { 
+  color: #fff; 
+}
+
+.dark-theme .selector-group label {
+  color: #ffffff;
+}
+
+.dark-theme .intersection-select {
+  background: #2a2a2a;
+  color: white;
+  border-color: #444;
+}
 </style>
