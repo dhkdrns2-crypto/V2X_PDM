@@ -1,7 +1,10 @@
 <template>
   <div class="dashboard-wrapper" :class="{ 'dark-theme': isDarkMode }">
     <aside class="sidebar">
-      <div class="sidebar-logo">V2XCONTROL<span class="dot">.</span></div>
+
+      <router-link to="/dashboard" class="sidebar-logo-link">
+        <div class="sidebar-logo">V2XCONTROL<span class="dot">.</span></div>
+      </router-link>
       <nav class="menu-list">
         <router-link to="/dashboard" class="menu-item" active-class="active"
           >통합모니터링</router-link
@@ -275,5 +278,20 @@ const handleLogout = () => {
 }
 .dark-theme .logout-btn:hover {
   background: #333;
+}
+
+/* CSS 추가/수정 */
+.sidebar-logo-link {
+  text-decoration: none; /* 밑줄 제거 */
+  display: block;        /* 영역 전체 클릭 가능하게 */
+  cursor: pointer;       /* 마우스 포인터 모양 변경 */
+}
+
+.sidebar-logo {
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 50px;
+  color: white; /* 링크로 감싸면 색상이 변할 수 있으므로 명시적 지정 */
 }
 </style>
