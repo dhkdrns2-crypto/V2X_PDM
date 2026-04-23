@@ -1,0 +1,1 @@
+const s="http://localhost:1004";async function n(a){const t=await a.text();if(!t)return{};try{return JSON.parse(t)}catch{return{}}}async function o(a){const t=await fetch(`${s.replace(/\/$/,"")}/${a.replace(/^\//,"")}`),e=await n(t);if(!t.ok){const r=e.message||e.error||t.statusText;throw new Error(typeof r=="string"?r:"요청에 실패했습니다.")}return e}export{o as a,n as p};
